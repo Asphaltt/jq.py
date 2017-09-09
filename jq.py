@@ -44,12 +44,23 @@ if __name__ == '__main__':
     elif len(sys.argv) > 2:
         if "-r" in sys.argv:
             reversed = True
+        l = sys.argv.copy()
+        l.remove(l[0])
         if not reversed:
-            beautify(sys.argv[1])
-        elif sys.argv[1] == "-r":
-            reverse(sys.argv[2])
-        elif sys.argv[2] == '-r':
-            reverse(sys.argv[1])
+            if len(l) == 1:
+                beautify(l[0])
+                sys.exit(0)
+            for f in l:
+                print(f)
+                beautify(sys.argv[1])
+        else:
+            l.remove("-r")
+            if len(l) == 1:
+                reverse(l[0])
+                sys.exit(0)
+            for f in l:
+                print(f)
+                reverse(f)
         sys.exit(0)
 
     try:
@@ -65,4 +76,3 @@ if __name__ == '__main__':
             sys.exit(0)
     except:
         pass
-
